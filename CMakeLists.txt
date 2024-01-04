@@ -20,6 +20,9 @@ find_package(pybind11 CONFIG REQUIRED)
 # Python module: cashflow 
 pybind11_add_module(cashflow cashflow.cpp)
 
+#target_link_libraries(cashflow PRIVATE pybind11::module)
+#target_link_libraries(cashflow -static-libgcc -static-libstdc++)
+
 # Copy targets to ./ - Directory where is this file CMakeLists.txt (project top level dir)
 install(
   TARGETS 
@@ -28,7 +31,7 @@ DESTINATION ${CMAKE_CURRENT_LIST_DIR})
 
 # Create helper target 'run' for running python script (sample client code.)
 add_custom_target(run
-    COMMAND python3 client1.py 
-    DEPENDS install 
+    COMMAND /home/qgb/anaconda3/bin client1.py 
+    DEPENDS install
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 )

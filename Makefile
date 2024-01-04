@@ -1,6 +1,6 @@
 
 # Directory where is installed VCPKG package manager. 
-VCPKG_ROOT := /home/archbox/build/vcpkg/
+VCPKG_ROOT := /home/qgb/github/vcpkg
 CACHE      := ./cache
 
 cachefile := $(CACHE)/CMakeCache.txt
@@ -14,7 +14,7 @@ install: $(cachefile)
 
 run: $(cachefile)
 	cmake --build $(CACHE) --target install
-	python3 client1.py
+	/home/qgb/anaconda3/bin/python client1.py
 
 clean:
 	rm -rf -v $(CACHE)

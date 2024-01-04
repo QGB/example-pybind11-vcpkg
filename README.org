@@ -1,3 +1,43 @@
+docker run -it -p 8888:8888 --privileged -v /root/docker/kuyoh_vcpkg/2023.12.12-ubuntu22.04/opt:/opt -v /root:/root -v /home/qgb:/home/qgb docker.io/kuyoh/vcpkg:2023.12.12-ubuntu22.04
+
+export http_proxy=socks5h://192.168.1.20:41080;export https_proxy=$http_proxy  # 不要这句也可以vcpkg install pybind11 5.8s
+
+vcpkg install pybind11
+
+cd /home/qgb/github/example-pybind11-vcpkg/
+
+cmake -DCMAKE_TOOLCHAIN_FILE:STRING=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake  -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Release -D PYTHON_EXECUTABLE=/home/qgb/anaconda3/bin/python -H. -B./cache -G Ninja
+
+cmake --build ./cache --config Release --target all -j 32 --
+
+```
+root@f92f2e6a26ce:/home/qgb/github/example-pybind11-vcpkg# make run
+cmake --build ./cache --target install
+[0/1] Install the project...
+-- Install configuration: "Release"
+-- Up-to-date: /home/qgb/github/example-pybind11-vcpkg/cashflow.cpython-311-x86_64-linux-gnu.so
+/home/qgb/anaconda3/bin/python client1.py
+Testing cash flow class
+Before adding 200
+i  = 0 c  =    -100.00
+i  = 1 c  =      10.00
+i  = 2 c  =      20.00
+i  = 3 c  =      30.00
+i  = 4 c  =      15.00
+```
+
+
+
+
+apt install -y aria2 zip unzip  autoconf automake autoconf-archive
+vcpkg install boost python3:x64-linux # 出错执行上面apt
+
+
+
+
+
+
+
 * Python3 native module - written in C++ with Pybind11.
 
 This example project contains a Python3 native module written in C++
