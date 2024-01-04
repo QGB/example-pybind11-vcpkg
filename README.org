@@ -10,7 +10,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE:STRING=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cma
 
 cmake --build ./cache --config Release --target all -j 32 --
 
-```
+#+BEGIN_SRC
 root@f92f2e6a26ce:/home/qgb/github/example-pybind11-vcpkg# make run
 cmake --build ./cache --target install
 [0/1] Install the project...
@@ -24,7 +24,7 @@ i  = 1 c  =      10.00
 i  = 2 c  =      20.00
 i  = 3 c  =      30.00
 i  = 4 c  =      15.00
-```
+#+END_SRC
 
 
 
