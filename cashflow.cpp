@@ -7,6 +7,11 @@
 #include <pybind11/stl.h>
 #include <pybind11/functional.h>
 
+#include <NumCpp.hpp>
+#include <cpprest/http_client.h>
+#include <cpprest/json.h>
+
+
 namespace py = pybind11;
 
 class CashFlow{
@@ -16,13 +21,34 @@ public:
 	CashFlow(){}
 	
 	void add(double x){
+		// 创建一个 3x3 的 NumCpp 数组
+		nc::NdArray<double> y = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+
+		// 使用 NumCpp 的 roll 函数进行向上移位
+		nc::NdArray<double> y_roll = nc::roll(y, -1, nc::Axis::ROW);
+
+		// 打印结果
+		std::cout << y << std::endl;
+		std::cout << y_roll << std::endl;
+
 		m_flow.push_back(x);      
 	}
 	void addVector(std::vector<double> const& xs){
 		for(const auto& x: xs)
 			m_flow.push_back(x);
 	}	
+
 	void clear(){
+		web::http::client::http_client client(U("http://myip.ipip.net"));
+		client.request(web::http::methods::GET).then([](web::http::http_response response) {
+			if (response.status_code() == web::http::status_codes::OK) {
+				return response.extract_string();
+			}
+			return pplx::task_from_result(std::string());
+		}).then([](const std::string& responseString) {
+			std::cout << "Your public IP address is: " << responseString << std::endl;
+		}).wait();
+		
 		m_flow.clear();
 	}
 	

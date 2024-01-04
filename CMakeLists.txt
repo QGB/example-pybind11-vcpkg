@@ -31,7 +31,7 @@ DESTINATION ${CMAKE_CURRENT_LIST_DIR})
 
 # Create helper target 'run' for running python script (sample client code.)
 add_custom_target(run
-    COMMAND /home/qgb/anaconda3/bin client1.py 
+    COMMAND /home/qgb/anaconda3/bin/python client1.py 
     DEPENDS install
     WORKING_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}
 )

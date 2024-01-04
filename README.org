@@ -1,6 +1,6 @@
 docker run -it -p 8888:8888 --privileged -v /root/docker/kuyoh_vcpkg/2023.12.12-ubuntu22.04/opt:/opt -v /root:/root -v /home/qgb:/home/qgb docker.io/kuyoh/vcpkg:2023.12.12-ubuntu22.04
 
-export http_proxy=socks5h://192.168.1.20:41080;export https_proxy=$http_proxy  # 不要这句也可以vcpkg install pybind11 5.8s
+export http_proxy=socks5h://192.168.1.20:41080;export https_proxy=$http_proxy  # 不要这句也可以vcpkg install numcpp 5.8s
 
 vcpkg install pybind11
 
